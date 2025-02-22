@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="94">
+    <version>1.0.0.6</version>
+    <author>original  FS17:jDanek; FS25: SupremeClicker</author>
+    <title>
+        <en>Better Minimap</en>
+        <de>Bessere Minimap</de>
+        <fr>Meilleure Minicarte</fr>
+        <cz>Lepší Minimapa</cz>
+        <pl>Ulepszona minimapa</pl>
+    </title>
+
+    <description>
+        <en><![CDATA[
+A better minimap that replaces the original minimap in the game. Adds the ability to switch imaging modes (plants, plant growth and soil) directly in minimap. These states are automatically restored after 60 seconds by changing the mode or resizing the minimap.
+
+Function:
+- Color status indication
+- The active mode is listed under the minimap
+- Automatic re-reading of states after 60s with deduction
+- Change the size of the minimap (normal / wide / larger)
+- Remembers the selected size during play
+- Switching transparency
+- Zoom in and out of the minimap
+
+Changelog:
+
+]]></en>
+        <de><![CDATA[
+Eine bessere Minikarte, die die ursprüngliche Minikarte im Spiel ersetzt. Fügt die Fähigkeit hinzu, Bildgebungsmodi (Pflanzen, Pflanzenwachstum und Boden) direkt in Minikarte zu wechseln. Diese Status werden automatisch nach 60 Sekunden wiederhergestellt, indem Sie den Modus ändern oder die Größe der Minikarte ändern.
+
+Eigenschaften:
+- Farbstatusanzeige
+- Der aktive Modus ist unter der Minikarte aufgeführt
+- Automatisches erneutes Lesen von Zuständen nach 60s mit Abzug
+- Ändere die Größe der Minikarte (normal / weit / größer)
+- Erinnert sich an die gewählte Größe während der Wiedergabe
+- Transparenz wechseln
+- Vergrößern und verkleinern der Minikarte
+
+Änderungsliste:
+
+
+]]></de>
+        <fr><![CDATA[
+Une meilleure minicarte qui remplace la minicarte originale dans le jeu. Ajoute la possibilité de changer de mode d'imagerie (plantes, croissance des plantes et sol) directement en minicarte. Ces états sont automatiquement restaurés après 60 secondes en changeant le mode ou en redimensionnant la minicarte.
+
+Caractéristiques:
+- Indication d'état de la couleur
+- Le mode actif est répertorié sous la minicarte
+- Relecture automatique des états après 60s avec déduction
+- Changer la taille de la minicarte (normale / large / plus grande)
+- Se souvient de la taille sélectionnée pendant la lecture
+- Transparence de commutation
+- Zoom avant et arrière sur la minicarte
+
+Changelog:
+
+
+]]></fr>
+        <cz><![CDATA[
+Lepší minimapa, který nahrazuje původní minimapu ve hře. Přidá možnost přepínat zobrazovací režimy (rostliny, růst rostlin a půda) přímo v minimapě. Tyto stavy se automaticky obnoví po 60 sekundách, změnou režimu nebo změnou velikosti minimapu.
+
+Funkce:
+- Barevná indikace stavu polí
+- Aktivní režim je vypsán pod minimapou
+- Automatické znovunačtení stavů po 60s s odpočtem
+- Změna velikost minimapy (normální / široký / větší)
+- Pamatuje si zvolenou velikost během hry
+- Přepínání průhlednosti
+- Přiblížení a oddálení minimapy
+
+Změny:
+
+
+]]></cz>
+        <pl><![CDATA[
+Ulepszona minimapa, która zastępuje oryginalną w grze minimapę. Dodaje możliwość przełączania trybów wyświetlania (rodzaje roślin, wzrost roślin i zagęszczenie gleby) bezpośrednio na minimapie. Stany te są automatycznie odświeżanie po 60 sekundach od zmiany trybu lub rozmiaru minimapy.
+
+Funkcje:
+- Wskaźnik statusu koloru
+- Aktywny tryb jest wyświetlany pod minimapą
+- Automatyczne odświeżanie stanów po 60s (licznik)
+- Zmiana rozmiaru minimapy (normalna/szeroka/duża)
+- Zapamiętuje wybrany rozmiar podczas gry
+- Zmiana przezroczystości
+- Przybliżanie i oddalanie minimapy
+
+Dziennik zmian:
+
+
+]]></pl>
+    </description>
+
+    <multiplayer supported="true"/>
+    <iconFilename>FS25_BetterMinimap_icon.dds</iconFilename>
+
+    <inputBindings>
+        <input name="FS25_BetterMinimap_SHOW_CONFIG_GUI" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_9" key2="" button="" device="0"
+               mouse=""/>
+        <input name="FS25_BetterMinimap_TOGGLE_HELP" category="ONFOOT VEHICLE" key1="KEY_lshift KEY_9" key2="" button="" device="0"
+               mouse=""/>
+        <input name="FS25_BetterMinimap_RELOAD" category="ONFOOT VEHICLE" key1="KEY_backslash" key2="" button="" device="0"
+               mouse=""/>
+        <input name="FS25_BetterMinimap_PREV" category="ONFOOT VEHICLE" key1="KEY_leftbracket" key2="" button="" device="0"
+               mouse=""/>
+        <input name="FS25_BetterMinimap_NEXT" category="ONFOOT VEHICLE" key1="KEY_rightbracket" key2="" button="" device="0"
+               mouse=""/>
+        <input name="FS25_BetterMinimap_ZOOM_IN" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_KP_plus" key2="" button=""
+               device="0" mouse=""/>
+        <input name="FS25_BetterMinimap_ZOOM_OUT" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_KP_minus" key2="" button=""
+               device="0" mouse=""/>
+    </inputBindings>
+
+    <extraSourceFiles>
+        <sourceFile filename="FS25_BetterMinimap.lua"/>
+    </extraSourceFiles>
+
+    <l10n filenamePrefix="translations/translation"/>
+
+</modDesc>
