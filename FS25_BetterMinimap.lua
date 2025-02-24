@@ -16,7 +16,6 @@ FS25_BetterMinimap = {}
 local FS25_BetterMinimap_mt = Class(FS25_BetterMinimap)
 
 -- #############################################################################
-
 function FS25_BetterMinimap:new(mission, modDirectory, modName, i18n, gui, inputManager, messageCenter)
     if debug > 1 then
         print("-> " .. myName .. ": new ")
@@ -63,12 +62,18 @@ function FS25_BetterMinimap:new(mission, modDirectory, modName, i18n, gui, input
     self.settings.transMode = 3
     self.settings.state = 0
 
+
     -- some global stuff - DONT touch
     FS25_BetterMinimap.actions = {}
-    FS25_BetterMinimap.actions.global = {"FS25_BetterMinimap_SHOW_CONFIG_GUI"}
-    FS25_BetterMinimap.actions.minimap = {"FS25_BetterMinimap_TOGGLE_HELP", "FS25_BetterMinimap_RELOAD",
-                                          "FS25_BetterMinimap_NEXT", "FS25_BetterMinimap_PREV",
-                                          "FS25_BetterMinimap_ZOOM_IN", "FS25_BetterMinimap_ZOOM_OUT"}
+    FS25_BetterMinimap.actions.global = {
+        "FS25_BetterMinimap_SHOW_CONFIG_GUI", 
+        "FS25_BetterMinimap_TOGGLE_HELP", 
+        "FS25_BetterMinimap_RELOAD", 
+        "FS25_BetterMinimap_NEXT", 
+        "FS25_BetterMinimap_PREV", 
+        "FS25_BetterMinimap_ZOOM_IN", 
+        "FS25_BetterMinimap_ZOOM_OUT" }
+    --FS25_BetterMinimap.actions.minimap = {"FS25_BetterMinimap_TOGGLE_HELP", "FS25_BetterMinimap_RELOAD", "FS25_BetterMinimap_NEXT", "FS25_BetterMinimap_PREV", "FS25_BetterMinimap_ZOOM_IN", "FS25_BetterMinimap_ZOOM_OUT"}
 
     -- for key press delay
     FS25_BetterMinimap.nextActionTime = 0
@@ -108,35 +113,45 @@ function FS25_BetterMinimap:new(mission, modDirectory, modName, i18n, gui, input
     return self
 end
 
--- #############################################################################
+--- Better Minimap Methods ---
 
+-- #############################################################################
+function FS25_BetterMinimap:init()
+    self.overlayPosX = 0.02
+    self.overlayPosY = 0.04
+    self.zoomFactor = 0.0007
+    self.visWidth = 0.3
+
+    self.pixelWidth = (1 / 3) / 1024.0
+    self.pixelHeight = self.pixelWidth * g_screenAspectRatio
+
+    -- set default map properties
+    self.mapWidth = self.const.mapSizes[self.settings.sizeMode][1] * self.pixelWidth
+    self.mapHeight = self.const.mapSizes[self.settings.sizeMode][2] * self.pixelHeight
+end
+
+-- #############################################################################
 function FS25_BetterMinimap:delete()
     if debug > 1 then
         print("-> " .. myName .. ": delete ")
     end
-
     -- delete our UI
     FS25_BetterMinimap.ui_menu:delete()
 end
 
 -- #############################################################################
-
 function FS25_BetterMinimap:onMissionLoaded(mission)
     if debug > 1 then
         print("-> " .. myName .. ": onMissionLoaded ")
     end
-
     -- create configuration dialog
     FS25_BetterMinimap.ui_menu = FS25_BetterMinimap_UI.new()
-    g_gui:loadGui(self.modDirectory .. "ui/FS25_BetterMinimap_UI.xml", "FS25_BetterMinimap_UI",
-        FS25_BetterMinimap.ui_menu)
+    g_gui:loadGui(self.modDirectory .. "ui/FS25_BetterMinimap_UI.xml", "FS25_BetterMinimap_UI", FS25_BetterMinimap.ui_menu)
 end
 
 -- #############################################################################
-
 function FS25_BetterMinimap:loadMap()
     print("--> loaded FS25_BetterMinimap version " .. self.version .. " (by SupremeClicker) <--")
-
     -- first set our current and default config to default values
     FS25_BetterMinimap:resetConfig()
     FS25_BetterMinimap:loadSettings()
@@ -149,13 +164,12 @@ function FS25_BetterMinimap:loadMap()
 end
 
 -- #############################################################################
-
 function FS25_BetterMinimap:unloadMap()
     print("--> unloaded FS25_BetterMinimap version " .. self.version .. " (by SupremeClicker) <--")
 end
 
 -- #############################################################################
-
+--[[
 function FS25_BetterMinimap.installSpecializations(vehicleTypeManager, specializationManager, modDirectory, modName)
     if debug > 1 then
         print("-> " .. myName .. ": installSpecializations ")
@@ -182,9 +196,9 @@ function FS25_BetterMinimap.installSpecializations(vehicleTypeManager, specializ
         end
     end
 end
+--]]
 
 -- #############################################################################
-
 function FS25_BetterMinimap.prerequisitesPresent(specializations)
     if debug > 1 then
         print("-> " .. myName .. ": prerequisites ")
@@ -194,7 +208,6 @@ function FS25_BetterMinimap.prerequisitesPresent(specializations)
 end
 
 -- #############################################################################
-
 function FS25_BetterMinimap.registerEventListeners(vehicleType)
     if debug > 1 then
         print("-> " .. myName .. ": registerEventListeners ")
@@ -208,7 +221,6 @@ function FS25_BetterMinimap.registerEventListeners(vehicleType)
 end
 
 -- #############################################################################
-
 function FS25_BetterMinimap:activateConfig()
     -- here we will "move" our config from the libConfig internal storage to the variables we actually use
 
@@ -220,7 +232,6 @@ function FS25_BetterMinimap:activateConfig()
 end
 
 -- #############################################################################
-
 function FS25_BetterMinimap:resetConfig(disable)
     if debug > 0 then
         print("-> " .. myName .. ": resetConfig ")
@@ -244,7 +255,6 @@ function FS25_BetterMinimap:resetConfig(disable)
 end
 
 -- #############################################################################
-
 function FS25_BetterMinimap:onLoad(savegame)
     if debug > 1 then
         print("-> " .. myName .. ": onLoad" .. mySelf(self))
@@ -262,7 +272,8 @@ function FS25_BetterMinimap:onUpdate(dt)
     -- activate mod if not activated
     if (not self.settings.init) then
         self.settings.init = true
-        g_currentMission.ingameMap.state = IngameMap.STATE_MINIMAP
+        --g_currentMission.ingameMap.state = IngameMap.STATE_MINIMAP
+        g_currentMission.hud.ingameMap.state = IngameMap.STATE_MINIMAP
         self:show()
     end
 
@@ -275,7 +286,8 @@ function FS25_BetterMinimap:onUpdate(dt)
             self:show();
         end;
     end; ]]
-    local ingameMap = g_currentMission.ingameMap
+    --local ingameMap = g_currentMission.ingameMap
+    local ingameMap = g_currentMission.hud.ingameMap
 
     if (g_gui:getIsGuiVisible() and g_gui.currentGuiName == "InGameMenu") then
         self.needUpdateFruitOverlay = true
@@ -309,7 +321,6 @@ function FS25_BetterMinimap:onUpdate(dt)
 end
 
 -- #############################################################################
-
 function FS25_BetterMinimap:onRegisterActionEvents(isSelected, isOnActiveVehicle)
     if debug > 1 then
         print("-> " .. myName .. ": onRegisterActionEvents " .. tostring(isSelected) .. ", " ..
@@ -326,9 +337,9 @@ function FS25_BetterMinimap:onRegisterActionEvents(isSelected, isOnActiveVehicle
     if isOnActiveVehicle and self:getIsControlled() then
         -- assemble list of actions to attach
         local actionList = FS25_BetterMinimap.actions.global
-        for _, v in ipairs(FS25_BetterMinimap.actions.minimap) do
-            table.insert(actionList, v)
-        end
+        --for _, v in ipairs(FS25_BetterMinimap.actions.minimap) do
+        --    table.insert(actionList, v)
+        --end
 
         -- attach our actions
         for _, actionName in pairs(actionList) do
@@ -376,7 +387,7 @@ function FS25_BetterMinimap:helpMenuPrio(actionName, eventName)
     -- GS_PRIO_VERY_LOW = 5
 end
 
--- aanpassen #############################################################################
+-- #############################################################################
 function FS25_BetterMinimap:onActionCall(actionName, keyStatus, arg4, arg5, arg6)
     if debug > 1 then
         print("-> " .. myName .. ": onActionCall " .. actionName .. ", keyStatus: " .. keyStatus .. mySelf(self))
@@ -387,9 +398,6 @@ function FS25_BetterMinimap:onActionCall(actionName, keyStatus, arg4, arg5, arg6
         print(arg6)
     end
         if actionName == "FS25_BetterMinimap_CONFIG_GUI" then
-            -- end of action: open configuration dialog
-            -- end of action: open configuration dialog
-            -- open configuration dialog
             if not self.isClient then
                 return
             end
@@ -400,10 +408,8 @@ function FS25_BetterMinimap:onActionCall(actionName, keyStatus, arg4, arg5, arg6
                 end
             end
         elseif actionName == "FS25_BetterMinimap_TOGGLE_HELP" then
-            -- end of action: toggle help
             self.settings.help_full = not self.settings.help_full
         elseif actionName == "FS25_BetterMinimap_RELOAD" then
-            -- hier           -- back diff
             self.needUpdateFruitOverlay = true
         elseif actionName == "FS25_BetterMinimap_NEXT" then
             self.settings.state = self.settings.state + 1
@@ -427,20 +433,24 @@ function FS25_BetterMinimap:onActionCall(actionName, keyStatus, arg4, arg5, arg6
             -- toggle fulscreen
             self.settings.fullscreen = not self.settings.fullscreen
 
-            g_currentMission.ingameMap.state = self.settings.fullscreen and IngameMap.STATE_MAP or IngameMap.STATE_MINIMAP
+            --g_currentMission.ingameMap.state = self.settings.fullscreen and IngameMap.STATE_MAP or IngameMap.STATE_MINIMAP
+            g_currentMission.hud.ingameMap.state = self.settings.fullscreen and IngameMap.STATE_MAP or IngameMap.STATE_MINIMAP
 
             if (self.settings.fullscreen) then
-                self.mapWidth, self.mapHeight = ingameMap.maxMapWidth, ingameMap.maxMapHeight
+                --self.mapWidth, self.mapHeight = ingameMap.maxMapWidth, ingameMap.maxMapHeight
+                self.mapWidth, self.mapHeight = getNormalizedScreenValues(unpack(ingameMap.SIZE.SELF))
+                
                 self.alpha = self.const.transparent[self.settings.transMode]
-                self.visWidth = ingameMap.mapVisWidthMax
+                --self.visWidth = ingameMap.mapVisWidthMax --??
+                self.visWidth = ingameMap.mapOverlay.width --??
             else
                 self.settings.mapUpdate = true
             end
         elseif not self.settings.fullscreen and actionName == "FS25_BetterMinimap_ZOOM_IN" then
-            ingameMap:zoom(-self.zoomFactor * dt)
+            IngameMap:zoom(-self.zoomFactor * dt)
             self.visWidth = ingameMap.mapVisWidthMin
         elseif not self.settings.fullscreen and actionName == "FS25_BetterMinimap_ZOOM_OUT" then
-            ingameMap:zoom(self.zoomFactor * dt)
+            IngameMap:zoom(self.zoomFactor * dt)
             self.visWidth = ingameMap.mapVisWidthMin
         end
 end
@@ -455,14 +465,16 @@ end
 function FS25_BetterMinimap:draw()
     if (self.settings.visible) then
 
-        local ingameMap = g_currentMission.ingameMap
+        --local ingameMap = g_currentMission.ingameMap
+        local ingameMap = g_currentMission.hud.ingameMap
 
-        ingameMap:zoom(0)
-        IngameMap.iconZoom = ingameMap.maxIconZoom
+        --to do
+        IngameMap:zoom(0)
+        IngameMap.iconZoom = ingameMap.maxIconZoom --??
 
-        ingameMap:updatePlayerPosition()
-        ingameMap:setPosition(self.overlayPosX, self.overlayPosY)
-        ingameMap:setSize(self.mapWidth, self.mapHeight)
+        IngameMap:updatePlayerPosition()
+        IngameMap:setPosition(self.overlayPosX, self.overlayPosY)
+        IngameMap:setSize(self.mapWidth, self.mapHeight)
 
         if (self.settings.fullscreen) then
             ingameMap.mapVisWidthMin = 1
@@ -473,7 +485,7 @@ function FS25_BetterMinimap:draw()
         ingameMap.centerXPos = ingameMap.normalizedPlayerPosX
         ingameMap.centerZPos = ingameMap.normalizedPlayerPosZ
 
-        local leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached = ingameMap:drawMap(self.alpha)
+        local leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached = IngameMap:drawMap(self.alpha)
         local foliageOverlay = g_inGameMenu.foliageStateOverlay
 
         if (self.settings.state ~= 0 and getIsFoliageStateOverlayReady(foliageOverlay)) then
@@ -483,12 +495,14 @@ function FS25_BetterMinimap:draw()
 
         self:renderMapMode()
 
-        ingameMap:renderHotspots(leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, false, self.settings.fullscreen)
-        ingameMap:renderPlayerArrows(false, leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, true)
-        ingameMap:renderHotspots(leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, true, self.settings.fullscreen)
-        ingameMap:renderPlayersCoordinates()
-        ingameMap:drawLatencyToServer()
-        ingameMap:drawInputBinding()
+        IngameMap:renderHotspots(leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, false, self.settings.fullscreen)
+        --ingameMap:renderPlayerArrows(false, leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, true)
+        IngameMap:drawPlayerArrows(false, leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, true)
+        IngameMap:renderHotspots(leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, true, self.settings.fullscreen)
+        --ingameMap:renderPlayersCoordinates()
+        IngameMap:drawPlayersCoordinates()
+        IngameMap:drawLatencyToServer()
+        --ingameMap:drawInputBinding()
     end
 end
 
@@ -501,14 +515,16 @@ end
 
 -- #############################################################################
 function FS25_BetterMinimap:deactivate()
-    local ingameMap = g_currentMission.ingameMap
-    ingameMap:resetSettings()
+    --local ingameMap = g_currentMission.ingameMap
+    local ingameMap = g_currentMission.hud.ingameMap
+    IngameMap:resetSettings()
 end
 
 -- #############################################################################
 function FS25_BetterMinimap:show()
     self.settings.visible = true
-    g_currentMission.ingameMap:setVisible(false)
+    --g_currentMission.ingameMap:setVisible(false)
+    IngameMap:setIsVisible(false)
     self:activate()
 end
 
@@ -516,7 +532,8 @@ end
 function FS25_BetterMinimap:hide()
     self.settings.visible = false
     self:deactivate()
-    g_currentMission.ingameMap:setVisible(true)
+    --g_currentMission.ingameMap:setVisible(true)
+    IngameMap:setIsVisible(true)
 end
 
 -- #############################################################################
@@ -554,11 +571,16 @@ function FS25_BetterMinimap:renderSelectedMinimap()
 end
 
 -- #############################################################################
+-- needs work
 function FS25_BetterMinimap:generateFruitOverlay()
-    local origState = g_inGameMenu.mapOverviewSelector.state
-    g_inGameMenu.mapOverviewSelector.state = self.settings.state
-    g_inGameMenu:generateFruitOverlay()
-    g_inGameMenu.mapOverviewSelector.state = origState
+    --local origState = g_inGameMenu.mapOverviewSelector.state
+    --g_inGameMenu.mapOverviewSelector.state = self.settings.state
+    --g_inGameMenu:generateFruitOverlay()
+    --g_inGameMenu.mapOverviewSelector.state = origState
+    local origState = inGameMap.state
+    inGameMap.state = self.settings.state
+    MapOverlayGenerator:generateFruitTypeOverlay()
+    inGameMap.state = origState
     self.timer = 0
 end
 -- #############################################################################
@@ -585,3 +607,5 @@ function FS25_BetterMinimap:loadSettings(fileName)
     self.settings.transMode = Utils.getNoNil(getXMLInt(xml, "BetterMinimap.transMode"), self.settings.transMode)
     delete(xml)
 end
+
+FS25_BetterMinimap:init()
