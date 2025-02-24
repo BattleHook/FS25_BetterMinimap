@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>jDanek</translationContributors>
+    <texts>
+        <text name="FS25_BetterMinimap_MapMode" text="Zobrazení:"/>
+        <text name="FS25_BetterMinimap_MapMode_S0" text="Normální"/>
+        <text name="FS25_BetterMinimap_MapMode_S1" text="Druhy plodin"/>
+        <text name="FS25_BetterMinimap_MapMode_S2" text="Růst"/>
+        <text name="FS25_BetterMinimap_MapMode_S3" text="Složení půdy"/>
+
+        <text name="gui_FS25_BetterMinimap_TITLE" text="Lepší Minimapa - nastavení"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_VISIBLE" text="Zobrazení"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_VISIBLE_TOOLTIP" text="Zapnutí / vypnutí zobrazení minimapy"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_HELP" text="Nápověda"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_HELP_TOOLTIP" text="Zapnutí / vypnutí zobrazení hlavní klávesy nápovědy"/>
+        <text name="gui_FS25_BetterMinimap_REFRESHFREQ" text="Obnovení"/>
+        <text name="gui_FS25_BetterMinimap_REFRESHFREQ_TOOLTIP" text="Změna času potřebného ke znovunačtení stavů"/>
+        <text name="gui_FS25_BetterMinimap_SIZEMODE" text="Velikost"/>
+        <text name="gui_FS25_BetterMinimap_SIZEMODE_TOOLTIP" text="Změna velikosti základní minimapy"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_N" text="Normální"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_W" text="Široká"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_L" text="Větší"/>
+        <text name="gui_FS25_BetterMinimap_TRANSPARENT" text="Průhlenost"/>
+        <text name="gui_FS25_BetterMinimap_TRANSPARENT_TOOLTIP" text="Zapnutí / vypnutí průhlednosti"/>
+        <text name="gui_FS25_BetterMinimap_TRANSMODE" text="Úroveň průhlednost"/>
+        <text name="gui_FS25_BetterMinimap_TRANSMODE_TOOLTIP" text="Změna úrovně průhlednosti (menší číslo = větší průhlednost)"/>
+
+        <text name="input_FS25_BetterMinimap_SHOW_CONFIG_GUI" text="Minimapa: Otevřít nastavení"/>
+        <text name="input_FS25_BetterMinimap_TOGGLE_HELP" text="Minimapa: Nápověda(Zap/Vyp)"/>
+        <text name="input_FS25_BetterMinimap_RELOAD" text="Minimapa: Manuální obnovení"/>
+        <text name="input_FS25_BetterMinimap_NEXT" text="Minimapa: Následující režim"/>
+        <text name="input_FS25_BetterMinimap_PREV" text="Minimapa: Předchozí režim"/>
+        <text name="input_FS25_BetterMinimap_ZOOM_IN" text="Minimapa: Přiblížení"/>
+        <text name="input_FS25_BetterMinimap_ZOOM_OUT" text="Minimapa: Oddálení"/>
+    </texts>
+</l10n>

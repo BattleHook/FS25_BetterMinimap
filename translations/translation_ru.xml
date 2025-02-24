@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>Gonimy_Vetrom</translationContributors>
+    <texts>
+        <text name="FS25_BetterMinimap_MapMode" text="Отображается:"/>
+        <text name="FS25_BetterMinimap_MapMode_S0" text="Только карта"/>
+        <text name="FS25_BetterMinimap_MapMode_S1" text="Типы культур"/>
+        <text name="FS25_BetterMinimap_MapMode_S2" text="Рост"/>
+        <text name="FS25_BetterMinimap_MapMode_S3" text="Состояние почвы"/>
+
+        <text name="gui_FS25_BetterMinimap_TITLE" text="Better Minimap - Настройки"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_VISIBLE" text="Отображение"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_VISIBLE_TOOLTIP" text="Вкл/выкл отображение миникарты"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_HELP" text="Подсказки"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_HELP_TOOLTIP" text="Вкл/Выкл отображения сочетаний клавиш "/>
+        <text name="gui_FS25_BetterMinimap_REFRESHFREQ" text="Обновление"/>
+        <text name="gui_FS25_BetterMinimap_REFRESHFREQ_TOOLTIP" text="Изменение времени необходимого для проверки состояния"/>
+        <text name="gui_FS25_BetterMinimap_SIZEMODE" text="Размер карты"/>
+        <text name="gui_FS25_BetterMinimap_SIZEMODE_TOOLTIP" text="Изменение размера основной карты"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_N" text="Стандартная"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_W" text="Широкая"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_L" text="Высокая"/>
+        <text name="gui_FS25_BetterMinimap_TRANSPARENT" text="Прозрачность"/>
+        <text name="gui_FS25_BetterMinimap_TRANSPARENT_TOOLTIP" text="Вкл/Выкл прозрачности"/>
+        <text name="gui_FS25_BetterMinimap_TRANSMODE" text="Уровень прозрачности"/>
+        <text name="gui_FS25_BetterMinimap_TRANSMODE_TOOLTIP" text="Изменение уровня прозрачности (чем меньше число, тем больше прозрачность)"/>
+
+        <text name="input_FS25_BetterMinimap_SHOW_CONFIG_GUI" text="Миникарта: Открыть настройки"/>
+        <text name="input_FS25_BetterMinimap_TOGGLE_HELP" text="Миникарта: Подсказки"/>
+        <text name="input_FS25_BetterMinimap_RELOAD" text="Миникарта: Ручное обновление"/>
+        <text name="input_FS25_BetterMinimap_NEXT" text="Миникарта: Следующий режим"/>
+        <text name="input_FS25_BetterMinimap_PREV" text="Миникарта: Предыдущий режим"/>
+        <text name="input_FS25_BetterMinimap_ZOOM_IN" text="Миникарта: Увеличить масштаб"/>
+        <text name="input_FS25_BetterMinimap_ZOOM_OUT" text="Миникарта: Уменьшить масштаб"/>
+    </texts>
+</l10n>

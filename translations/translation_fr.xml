@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>jDanek</translationContributors>
+    <texts>
+        <text name="FS25_BetterMinimap_MapMode" text="Affichage:"/>
+        <text name="FS25_BetterMinimap_MapMode_S0" text="Normal"/>
+        <text name="FS25_BetterMinimap_MapMode_S1" text="Types de cultures"/>
+        <text name="FS25_BetterMinimap_MapMode_S2" text="Croissance"/>
+        <text name="FS25_BetterMinimap_MapMode_S3" text="Composition de la terre"/>
+
+        <text name="gui_FS25_BetterMinimap_TITLE" text="Meilleure Minicarte - Paramètres"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_VISIBLE" text="Affichage"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_VISIBLE_TOOLTIP" text="Activer / désactiver la vue de minicarte"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_HELP" text="Aide"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_HELP_TOOLTIP" text="Activer / désactiver la touche d'aide principale"/>
+        <text name="gui_FS25_BetterMinimap_REFRESHFREQ" text="Restaurer"/>
+        <text name="gui_FS25_BetterMinimap_REFRESHFREQ_TOOLTIP" text="Modifier le temps nécessaire pour récupérer les états"/>
+        <text name="gui_FS25_BetterMinimap_SIZEMODE" text="Taille"/>
+        <text name="gui_FS25_BetterMinimap_SIZEMODE_TOOLTIP" text="Redimensionner la mini-carte de base"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_N" text="Normal"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_W" text="Large"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_L" text="Plus grand"/>
+        <text name="gui_FS25_BetterMinimap_TRANSPARENT" text="Transparence"/>
+        <text name="gui_FS25_BetterMinimap_TRANSPARENT_TOOLTIP" text="Activer / désactiver la transparence"/>
+        <text name="gui_FS25_BetterMinimap_TRANSMODE" text="Niveau de transparence"/>
+        <text name="gui_FS25_BetterMinimap_TRANSMODE_TOOLTIP" text="Changer le niveau de transparence (plus petit nombre = plus de transparence)"/>
+
+        <text name="input_FS25_BetterMinimap_SHOW_CONFIG_GUI" text="Minicarte: Ouvrir les paramètres"/>
+        <text name="input_FS25_BetterMinimap_TOGGLE_HELP" text="Minicarte: Aide (On/Off)"/>
+        <text name="input_FS25_BetterMinimap_RELOAD" text="Minicarte: Rechargement manuel"/>
+        <text name="input_FS25_BetterMinimap_NEXT" text="Minicarte: Un autre mode"/>
+        <text name="input_FS25_BetterMinimap_PREV" text="Minicarte: Mode précédent"/>
+        <text name="input_FS25_BetterMinimap_ZOOM_IN" text="Minicarte: Zoom avant"/>
+        <text name="input_FS25_BetterMinimap_ZOOM_OUT" text="Minicarte: Zoom arrière"/>
+    </texts>
+</l10n>

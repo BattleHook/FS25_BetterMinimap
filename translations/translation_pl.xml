@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>Ziuta</translationContributors>
+    <texts>
+        <text name="FS25_BetterMinimap_MapMode" text="Tryb wyświetlania:"/>
+        <text name="FS25_BetterMinimap_MapMode_S0" text="Nawigacja"/>
+        <text name="FS25_BetterMinimap_MapMode_S1" text="Rodzaje upraw"/>
+        <text name="FS25_BetterMinimap_MapMode_S2" text="Wzrost upraw"/>
+        <text name="FS25_BetterMinimap_MapMode_S3" text="Zagęszczenie gleby"/>
+
+        <text name="gui_FS25_BetterMinimap_TITLE" text="Ulepszona minimapa - Ustawienia"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_VISIBLE" text="Tryb wyświetlania"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_VISIBLE_TOOLTIP" text="Pokaż/Ukryj minimapę"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_HELP" text="Przyciski funkcyjne"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_HELP_TOOLTIP" text="Pokaż/Ukryj przyciski w oknie pomocy"/>
+        <text name="gui_FS25_BetterMinimap_REFRESHFREQ" text="Odświeżanie"/>
+        <text name="gui_FS25_BetterMinimap_REFRESHFREQ_TOOLTIP" text="Czas do następnego odświeżenia stanów"/>
+        <text name="gui_FS25_BetterMinimap_SIZEMODE" text="Rozmiar"/>
+        <text name="gui_FS25_BetterMinimap_SIZEMODE_TOOLTIP" text="Zmienia rozmiar podstawowej minimapy"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_N" text="Domyślny"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_W" text="Szeroka"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_L" text="Duża"/>
+        <text name="gui_FS25_BetterMinimap_TRANSPARENT" text="Przezroczystość"/>
+        <text name="gui_FS25_BetterMinimap_TRANSPARENT_TOOLTIP" text="Włącza/Wyłącza przezroczystość minimapy"/>
+        <text name="gui_FS25_BetterMinimap_TRANSMODE" text="Stopień przezroczystości"/>
+        <text name="gui_FS25_BetterMinimap_TRANSMODE_TOOLTIP" text="Im mniejsza liczba tym minimapa jest bardziej przezroczysta"/>
+
+        <text name="input_FS25_BetterMinimap_SHOW_CONFIG_GUI" text="Minimapa: Otwórz ustawienia"/>
+        <text name="input_FS25_BetterMinimap_TOGGLE_HELP" text="Minimapa: Pokaż/Ukryj pomoc"/>
+        <text name="input_FS25_BetterMinimap_RELOAD" text="Minimapa: Odśwież ręcznie"/>
+        <text name="input_FS25_BetterMinimap_NEXT" text="Minimapa: Następny tryb"/>
+        <text name="input_FS25_BetterMinimap_PREV" text="Minimapa: Poprzedni tryb"/>
+        <text name="input_FS25_BetterMinimap_ZOOM_IN" text="Minimapa: Przybliż"/>
+        <text name="input_FS25_BetterMinimap_ZOOM_OUT" text="Minimapa: Oddal"/>
+    </texts>
+</l10n>

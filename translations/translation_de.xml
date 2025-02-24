@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>jDanek</translationContributors>
+    <texts>
+        <text name="FS25_BetterMinimap_MapMode" text="Anzeige:"/>
+        <text name="FS25_BetterMinimap_MapMode_S0" text="Normal"/>
+        <text name="FS25_BetterMinimap_MapMode_S1" text="Feldfrüchte"/>
+        <text name="FS25_BetterMinimap_MapMode_S2" text="Wachstum"/>
+        <text name="FS25_BetterMinimap_MapMode_S3" text="Bodenbeschaffenheit"/>
+
+        <text name="gui_FS25_BetterMinimap_TITLE" text="Bessere Minimap - Einstellungen"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_VISIBLE" text="Anzeige"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_VISIBLE_TOOLTIP" text="Schalte die Minikarte ein / aus"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_HELP" text="Hilfe"/>
+        <text name="gui_FS25_BetterMinimap_TOGGLE_HELP_TOOLTIP" text="Schalten Sie die Haupthilfetaste ein / aus"/>
+        <text name="gui_FS25_BetterMinimap_REFRESHFREQ" text="Wiederherstellung"/>
+        <text name="gui_FS25_BetterMinimap_REFRESHFREQ_TOOLTIP" text="Ändern der Zeit, die zum Abrufen von Status benötigt wird"/>
+        <text name="gui_FS25_BetterMinimap_SIZEMODE" text="Größe"/>
+        <text name="gui_FS25_BetterMinimap_SIZEMODE_TOOLTIP" text="Größe der Basisminikarte ändern"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_N" text="Normal"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_W" text="Breit"/>
+        <text name="gui_FS25_BetterMinimap_MAPSIZE_L" text="Größer"/>
+        <text name="gui_FS25_BetterMinimap_TRANSPARENT" text="Transparenz"/>
+        <text name="gui_FS25_BetterMinimap_TRANSPARENT_TOOLTIP" text="Sie die Transparenz ein / aus"/>
+        <text name="gui_FS25_BetterMinimap_TRANSMODE" text="Transparenzniveau"/>
+        <text name="gui_FS25_BetterMinimap_TRANSMODE_TOOLTIP" text="Ändern der Transparenzstufe (kleinere Anzahl = größere Transparenz)"/>
+
+        <text name="input_FS25_BetterMinimap_SHOW_CONFIG_GUI" text="Minimap: Öffne die Einstellungen"/>
+        <text name="input_FS25_BetterMinimap_TOGGLE_HELP" text="Minimap: Hilfe (Ein/Aus)"/>
+        <text name="input_FS25_BetterMinimap_RELOAD" text="Minimap: Manuelles Nachladen"/>
+        <text name="input_FS25_BetterMinimap_NEXT" text="Minimap: Ein anderer Modus"/>
+        <text name="input_FS25_BetterMinimap_PREV" text="Minimap: Vorheriger Modus"/>
+        <text name="input_FS25_BetterMinimap_ZOOM_IN" text="Minimap: Heranzoomen"/>
+        <text name="input_FS25_BetterMinimap_ZOOM_OUT" text="Minimap: Verkleinern"/>
+    </texts>
+</l10n>
