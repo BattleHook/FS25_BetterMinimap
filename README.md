@@ -1,5 +1,7 @@
 Based on **FS17 Better Minimap by jDanek**
 
+**WARNING: This mod is still under development and is not functional yet**
+
 following functionality is the goal:
 
 *A better minimap that replaces the original minimap in the game. Adds the ability to switch imaging modes (plants, plant growth and soil) directly in minimap. These states are automatically restored after 60 seconds by changing the mode or resizing the minimap.*
