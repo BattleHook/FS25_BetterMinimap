@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="94">
-    <version>1.0.0.6</version>
+    <version>0.9.0.12</version>
     <author>original  FS17:jDanek; FS25: SupremeClicker</author>
     <title>
-        <en>Better Minimap</en>
-        <de>Bessere Minimap</de>
-        <fr>Meilleure Minicarte</fr>
-        <cz>Lepší Minimapa</cz>
-        <pl>Ulepszona minimapa</pl>
+        <en>Better Minimap (MOD is still being developed)</en>
+        <de>Bessere Minimap (Mod wird noch entwickelt)</de>
+        <fr>Meilleure Minicarte (Le mod est toujours en cours de développement)</fr>
+        <cz>Lepší Minimapa (Mod se stále vyvíjí)</cz>
+        <pl>Ulepszona minimap (MOD jest nadal rozwijany)</pl>
     </title>
-
     <description>
         <en><![CDATA[
 A better minimap that replaces the original minimap in the game. Adds the ability to switch imaging modes (plants, plant growth and soil) directly in minimap. These states are automatically restored after 60 seconds by changing the mode or resizing the minimap.
@@ -91,31 +90,49 @@ Dziennik zmian:
 
 ]]></pl>
     </description>
-
-    <multiplayer supported="true"/>
+    <multiplayer supported="true" />
     <iconFilename>FS25_BetterMinimap_icon.dds</iconFilename>
-
-    <inputBindings>
-        <input name="FS25_BetterMinimap_SHOW_CONFIG_GUI" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_9" key2="" button="" device="0"
-               mouse=""/>
-        <input name="FS25_BetterMinimap_TOGGLE_HELP" category="ONFOOT VEHICLE" key1="KEY_lshift KEY_9" key2="" button="" device="0"
-               mouse=""/>
-        <input name="FS25_BetterMinimap_RELOAD" category="ONFOOT VEHICLE" key1="KEY_backslash" key2="" button="" device="0"
-               mouse=""/>
-        <input name="FS25_BetterMinimap_PREV" category="ONFOOT VEHICLE" key1="KEY_leftbracket" key2="" button="" device="0"
-               mouse=""/>
-        <input name="FS25_BetterMinimap_NEXT" category="ONFOOT VEHICLE" key1="KEY_rightbracket" key2="" button="" device="0"
-               mouse=""/>
-        <input name="FS25_BetterMinimap_ZOOM_IN" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_KP_plus" key2="" button=""
-               device="0" mouse=""/>
-        <input name="FS25_BetterMinimap_ZOOM_OUT" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_KP_minus" key2="" button=""
-               device="0" mouse=""/>
-    </inputBindings>
-
+    <l10n filenamePrefix="translations/translation" />
+    <actions>
+        <action name="FS25_BetterMinimap_SHOW_CONFIG_GUI" />
+        <action name="FS25_BetterMinimap_TOGGLE_HELP" />
+        <action name="FS25_BetterMinimap_RELOAD" />
+        <action name="FS25_BetterMinimap_PREV" />
+        <action name="FS25_BetterMinimap_NEXT" />
+        <action name="FS25_BetterMinimap_ZOOM_IN" />
+        <action name="FS25_BetterMinimap_ZOOM_OUT" />
+    </actions>
+    <inputBinding>
+        <actionBinding action="FS25_BetterMinimap_SHOW_CONFIG_GUI">
+            <binding device="KB_MOUSE_DEFAULT"
+                     input="KEY_lalt KEY_9" />
+        </actionBinding>
+        <actionBinding action="FS25_BetterMinimap_TOGGLE_HELP">
+            <binding device="KB_MOUSE_DEFAULT"
+                     input="KEY_lshift KEY_9" />
+        </actionBinding>
+        <actionBinding action="FS25_BetterMinimap_RELOAD">
+            <binding device="KB_MOUSE_DEFAULT"
+                     input="KEY_backslash" />
+        </actionBinding>
+        <actionBinding action="FS25_BetterMinimap_PREV">
+            <binding device="KB_MOUSE_DEFAULT"
+                     input="KEY_leftbracket" />
+        </actionBinding>
+        <actionBinding action="FS25_BetterMinimap_NEXT">
+            <binding device="KB_MOUSE_DEFAULT"
+                     input="KEY_rightbracket" />
+        </actionBinding>
+        <actionBinding action="FS25_BetterMinimap_ZOOM_IN">
+            <binding device="KB_MOUSE_DEFAULT"
+                     input="KEY_lalt KEY_KP_plus" />
+        </actionBinding>
+        <actionBinding action="FS25_BetterMinimap_ZOOM_OUT">
+            <binding device="KB_MOUSE_DEFAULT"
+                     input="KEY_lalt KEY_KP_minus" />
+        </actionBinding>
+    </inputBinding>
     <extraSourceFiles>
-        <sourceFile filename="FS25_BetterMinimap.lua"/>
+        <sourceFile filename="FS25_BetterMinimap_Loader.lua" />
     </extraSourceFiles>
-
-    <l10n filenamePrefix="translations/translation"/>
-
 </modDesc>
