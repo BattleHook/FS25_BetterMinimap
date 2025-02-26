@@ -15,7 +15,6 @@ local myName = "FS25_BetterMinimap"
 FS25_BetterMinimap = {}
 
 addModEventListener(FS25_BetterMinimap)
-
 local FS25_BetterMinimap_mt = Class(FS25_BetterMinimap)
 
 -- #############################################################################
@@ -29,24 +28,22 @@ function FS25_BetterMinimap:new(mission, modDirectory, modName, i18n, gui, input
 
     setmetatable(self, FS25_BetterMinimap_mt)
 
-    modDirectory = g_currentModDirectory
-    self.modDirectory = modDirectory
-    modName = g_currentModName
-    self.modName = modName
-    local modDesc = loadXMLFile("modDesc", modDirectory .. "modDesc.xml")
-    modDescVersion = getXMLString(modDesc, "modDesc.version")
-    self.version = modDescVersion
     self.mission = mission
+    self.modDirectory = modDirectory
+    self.modName = modName
     self.i18n = i18n
     self.gui = gui
     self.inputManager = inputManager
     self.messageCenter = messageCenter
-    self.mapEvents = {}
 
+    local modDesc = loadXMLFile("modDesc", modDirectory .. "modDesc.xml")
+    self.version = getXMLString(modDesc, "modDesc.version")
+
+    self.mapEvents = {}
 
     --- Constants ---
     self.const = {}
-    self.const.settings_file = modDirectory .. "../modSettings/FS25_BetterMinimap_Settings.xml"
+    -- self.const.settings_file = modDirectory .. "../modSettings/FS25_BetterMinimap_Settings.xml"
     self.const.frequency = {15, 30, 45, 60} -- refresh frequency (in sec)
     self.const.mapSizes = {{456, 350}, {800, 350}, {800, 600}} -- minimap sizes {width, height}
     self.const.mapNames = {g_i18n:getText("gui_FS25_BetterMinimap_MAPSIZE_N"),
@@ -56,17 +53,19 @@ function FS25_BetterMinimap:new(mission, modDirectory, modName, i18n, gui, input
 
     --- Settings ---
     self.settings = {}
+
+    self.visible = true
+    self.help_min = true
+    self.frequency = 4
+    self.sizeMode = 1
+    self.transparent = false
+    self.transMode = 3
+
     self.settings.init = false
     self.settings.mapUpdate = false
-    self.settings.saveSettings = false
-    self.settings.visible = true
-    self.settings.help_min = true
+    self.settings.saveConfig = false
     self.settings.help_full = false
     self.settings.fullscreen = false
-    self.settings.frequency = 4
-    self.settings.sizeMode = 1
-    self.settings.transparent = false
-    self.settings.transMode = 3
     self.settings.state = 0
 
     self.overlayPosX = 0.02
@@ -78,8 +77,8 @@ function FS25_BetterMinimap:new(mission, modDirectory, modName, i18n, gui, input
     self.pixelHeight = self.pixelWidth * g_screenAspectRatio
 
     -- set default map properties
-    self.mapWidth = self.const.mapSizes[self.settings.sizeMode][1] * self.pixelWidth
-    self.mapHeight = self.const.mapSizes[self.settings.sizeMode][2] * self.pixelHeight
+    self.mapWidth = self.const.mapSizes[self.sizeMode][1] * self.pixelWidth
+    self.mapHeight = self.const.mapSizes[self.sizeMode][2] * self.pixelHeight
 
     -- some global stuff - DONT touch
     FS25_BetterMinimap.actions = {"FS25_BetterMinimap_SHOW_CONFIG_GUI", "FS25_BetterMinimap_TOGGLE_HELP",
@@ -112,6 +111,7 @@ function FS25_BetterMinimap:new(mission, modDirectory, modName, i18n, gui, input
         fs25green = {60 / 255, 118 / 255, 0 / 255, 1} -- #3c7600
     }
     -- load sound effects
+    --[[
     if g_dedicatedServerInfo == nil then
         local file, id
         FS25_BetterMinimap.sounds = {}
@@ -121,31 +121,11 @@ function FS25_BetterMinimap:new(mission, modDirectory, modName, i18n, gui, input
             loadSample(FS25_BetterMinimap.sounds[id], file, false)
         end
     end
-
+    --]]
     return self
 end
 
 --- Better Minimap Methods ---
--- #############################################################################
-
-function FS25_BetterMinimap:init()
-    if debug > 1 then
-        print("FS25_BetterMinimap:init()")
-    end
---[[
-    -- hook into early load
-    Mission00.load = Utils.prependedFunction(Mission00.load, FS25_BetterMinimap_load)
-    -- hook into late load
-    Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished,
-        FS25_BetterMinimap_loadedMission)
-    -- hook into late unload
-    FSBaseMission.delete = Utils.appendedFunction(FSBaseMission.delete, FS25_BetterMinimap_unload)
-    -- hook into validateTypes
-    -- TypeManager.validateTypes = Utils.prependedFunction(TypeManager.validateTypes, FS25_BetterMinimap_validateTypes)
-    --]]
-end
-
--- #############################################################################
 
 function FS25_BetterMinimap:delete()
     if debug > 1 then
@@ -170,11 +150,10 @@ end
 -- #############################################################################
 
 function FS25_BetterMinimap:loadMap()
-    --print("--> loaded FS25_BetterMinimap version " .. modDescVersion .. " (by SupremeClicker) <--")
+    -- print("--> loaded FS25_BetterMinimap version " .. modDescVersion .. " (by SupremeClicker) <--")
     print("--> loaded FS25_BetterMinimap (by SupremeClicker) <--")
     -- first set our current and default config to default values
     FS25_BetterMinimap:resetConfig()
-    FS25_BetterMinimap:loadSettings()
     -- then read values from disk and "overwrite" current config
     lC:readConfig()
     -- then write current config (which is now a merge between default values and from disk)
@@ -189,7 +168,7 @@ end
 -- #############################################################################
 
 function FS25_BetterMinimap:unloadMap()
-    --print("--> unloaded FS25_BetterMinimap version " .. modDescVersion .. " (by SupremeClicker) <--")
+    -- print("--> unloaded FS25_BetterMinimap version " .. modDescVersion .. " (by SupremeClicker) <--")
     print("--> unloaded FS25_BetterMinimap (by SupremeClicker) <--")
 end
 
@@ -201,42 +180,6 @@ function FS25_BetterMinimap.prerequisitesPresent(specializations)
     end
 
     return true
-end
-
--- #############################################################################
-
-function FS25_BetterMinimap:activateConfig()
-    -- here we will "move" our config from the libConfig internal storage to the variables we actually use
-
-    -- functions
-
-    -- globals
-    FS25_BetterMinimap.showKeysInHelpMenu = lC:getConfigValue("global.misc", "showKeysInHelpMenu")
-    FS25_BetterMinimap.soundIsOn = lC:getConfigValue("global.misc", "soundIsOn")
-end
-
--- #############################################################################
-
-function FS25_BetterMinimap:resetConfig(disable)
-    if debug > 0 then
-        print("-> " .. myName .. ": resetConfig ")
-    end
-    disable = false or disable
-
-    -- start fresh
-    lC:clearConfig()
-
-    -- functions
-
-    -- globals
-    lC:addConfigValue("global.misc", "showKeysInHelpMenu", "bool", true)
-    lC:addConfigValue("global.misc", "soundIsOn", "bool", true)
-
-    -- sound volumes
-    lC:addConfigValue("sfx.track", "volume", "float", 0.10)
-    lC:addConfigValue("sfx.brake", "volume", "float", 0.10)
-    lC:addConfigValue("sfx.diff", "volume", "float", 0.50)
-    lC:addConfigValue("sfx.hl_approach", "volume", "float", 0.10)
 end
 
 -- #############################################################################
@@ -279,13 +222,13 @@ function FS25_BetterMinimap:onUpdate(dt)
         self.needUpdateFruitOverlay = true
     end
 
-    if (self.timer < (self.const.frequency[self.settings.frequency] * 1000)) then
+    if (self.timer < (self.const.frequency[self.frequency] * 1000)) then
         self.timer = self.timer + dt
     else
         self.needUpdateFruitOverlay = true
     end
     if (self.settings.init and g_gui.currentGui == nil) then
-        if (self.settings.help_min) then
+        if (self.help_min) then
             g_InputBinding:setActionEventTextVisibility(actionName, true)
             g_InputBinding:setActionEventTextPriority(actionName, GS_PRIO_HIGH)
         end
@@ -299,8 +242,8 @@ function FS25_BetterMinimap:onUpdate(dt)
             self:renderSelectedMinimap()
         end
         -- save settings to XML
-        if (self.settings.saveSettings and fileExists(self.const.settings_file)) then
-            self:saveSettings(self.const.settings_file)
+        if (self.settings.saveConfig) then
+            self:saveConfig()
         end
     end
 end
@@ -416,7 +359,7 @@ function FS25_BetterMinimap:onActionCall(actionName, keyStatus, arg4, arg5, arg6
             -- self.mapWidth, self.mapHeight = ingameMap.maxMapWidth, ingameMap.maxMapHeight
             self.mapWidth, self.mapHeight = getNormalizedScreenValues(unpack(ingameMap.SIZE.SELF))
 
-            self.alpha = self.const.transparent[self.settings.transMode]
+            self.alpha = self.const.transparent[self.transMode]
             -- self.visWidth = ingameMap.mapVisWidthMax --??
             self.visWidth = ingameMap.mapOverlay.width -- ??
         else
@@ -440,7 +383,7 @@ end
 -- #############################################################################
 
 function FS25_BetterMinimap:draw()
-    if (self.settings.visible) then
+    if (self.visible) then
         -- local ingameMap = g_currentMission.ingameMap
         local ingameMap = g_currentMission.hud.ingameMap
 
@@ -505,7 +448,7 @@ end
 -- #############################################################################
 
 function FS25_BetterMinimap:show()
-    self.settings.visible = true
+    self.visible = true
     -- g_currentMission.ingameMap:setVisible(false)
     IngameMap:setIsVisible(false)
     self:activate()
@@ -514,7 +457,7 @@ end
 -- #############################################################################
 
 function FS25_BetterMinimap:hide()
-    self.settings.visible = false
+    self.visible = false
     self:deactivate()
     -- g_currentMission.ingameMap:setVisible(true)
     IngameMap:setIsVisible(true)
@@ -528,7 +471,7 @@ function FS25_BetterMinimap:renderMapMode()
     -- time to refresh
     if (self.settings.state ~= 0) then
         renderText(self.overlayPosX + 0.003, self.overlayPosY + 0.007, 0.013,
-            "[" .. math.ceil((self.const.frequency[self.settings.frequency]) - (self.timer / 1000)) .. "]")
+            "[" .. math.ceil((self.const.frequency[self.frequency]) - (self.timer / 1000)) .. "]")
     end
     -- map mode info (more fruits = more pages)
     local modeInfo = g_i18n:getText("FS25_BetterMinimap_MapMode_S" .. self.settings.state)
@@ -550,9 +493,9 @@ end
 -- #############################################################################
 
 function FS25_BetterMinimap:renderSelectedMinimap()
-    self.mapWidth = self.const.mapSizes[self.settings.sizeMode][1] * self.pixelWidth
-    self.mapHeight = self.const.mapSizes[self.settings.sizeMode][2] * self.pixelHeight
-    self.alpha = self.settings.transparent and self.const.transparent[self.settings.transMode] or 1
+    self.mapWidth = self.const.mapSizes[self.sizeMode][1] * self.pixelWidth
+    self.mapHeight = self.const.mapSizes[self.sizeMode][2] * self.pixelHeight
+    self.alpha = self.transparent and self.const.transparent[self.transMode] or 1
     self.visWidth = 0.3
     -- mapupdate
     self.settings.mapUpdate = false
@@ -571,31 +514,64 @@ function FS25_BetterMinimap:generateFruitOverlay()
     inGameMap.state = origState
     self.timer = 0
 end
+
 -- #############################################################################
 
-function FS25_BetterMinimap:saveSettings(fileName)
-    local xml = createXMLFile("BetterMinimap", fileName, "BetterMinimap")
-    setXMLBool(xml, "BetterMinimap.visible", self.settings.visible)
-    setXMLBool(xml, "BetterMinimap.help", self.settings.help_min)
-    setXMLInt(xml, "BetterMinimap.frequency", self.settings.frequency)
-    setXMLInt(xml, "BetterMinimap.sizeMode", self.settings.sizeMode)
-    setXMLBool(xml, "BetterMinimap.transparency", self.settings.transparent)
-    setXMLInt(xml, "BetterMinimap.transMode", self.settings.transMode)
-    saveXMLFile(xml)
-    delete(xml)
+function strtoboolean(str)
+    local bool = false
+    if str == "true" then
+        bool = true
+    end
+    return bool
 end
 
 -- #############################################################################
 
-function FS25_BetterMinimap:loadSettings(fileName)
-    local xml = loadXMLFile("BetterMinimap", fileName)
-    self.settings.visible = Utils.getNoNil(getXMLBool(xml, "BetterMinimap.visible"), self.settings.visible)
-    self.settings.help_min = Utils.getNoNil(getXMLBool(xml, "BetterMinimap.help"), self.settings.help_min)
-    self.settings.frequency = Utils.getNoNil(getXMLInt(xml, "BetterMinimap.frequency"), self.settings.frequency)
-    self.settings.sizeMode = Utils.getNoNil(getXMLInt(xml, "BetterMinimap.sizeMode"), self.settings.sizeMode)
-    self.settings.transparent = Utils.getNoNil(getXMLBool(xml, "BetterMinimap.transparency"), self.settings.transparent)
-    self.settings.transMode = Utils.getNoNil(getXMLInt(xml, "BetterMinimap.transMode"), self.settings.transMode)
-    delete(xml)
+function FS25_BetterMinimap:activateConfig()
+    -- here we will "move" our config from the libConfig internal storage to the variables we actually use
+     
+    FS25_BetterMinimap.visible = strtoboolean(lC:getConfigValue("settings", "visible"))
+    FS25_BetterMinimap.help_min = strtoboolean(lC:getConfigValue("settings", "help_min"))
+    FS25_BetterMinimap.frequency = tonumber(lC:getConfigValue("settings", "frequency"))
+    FS25_BetterMinimap.sizeMode = tonumber(lC:getConfigValue("settings", "sizeMode"))
+    FS25_BetterMinimap.transparent = strtoboolean(lC:getConfigValue("settings", "transparant"))
+    FS25_BetterMinimap.transMode = tonumber(lC:getConfigValue("settings", "transMode"))
 end
 
-FS25_BetterMinimap:init()
+-- #############################################################################
+
+function FS25_BetterMinimap:resetConfig(disable)
+    if debug > 0 then
+        print("-> " .. myName .. ": resetConfig ")
+    end
+    disable = false or disable
+    -- start fresh
+    lC:clearConfig()
+    -- addConfigValue(section, name, typ, value, newLine)
+    -- typ: bool int float, newline: bool (empty defaults to false)
+    lC:addConfigValue("settings", "visible", "bool", true, true)
+    lC:addConfigValue("settings", "help_min", "bool", true, true)
+    lC:addConfigValue("settings", "frequency", "int", 4, true)
+    lC:addConfigValue("settings", "sizeMode", "int", 1, true)
+    lC:addConfigValue("settings", "transparant", "bool", false, true)
+    lC:addConfigValue("settings", "transMode", "int", 3, true)
+end
+
+-- #############################################################################
+
+function FS25_BetterMinimap:saveConfig(disable)
+    if debug > 0 then
+        print("-> " .. myName .. ": saveConfig ")
+    end
+    disable = false or disable
+    -- start fresh
+    lC:clearConfig()
+    -- addConfigValue(section, name, typ, value, newLine)
+    -- typ: bool int float, newline: bool (empty defaults to false)
+    lC:addConfigValue("settings", "visible", "bool", FS25_BetterMinimap.visible, true)
+    lC:addConfigValue("settings", "help_min", "bool", FS25_BetterMinimap.help_min, true)
+    lC:addConfigValue("settings", "frequency", "int", FS25_BetterMinimap.frequency, true)
+    lC:addConfigValue("settings", "sizeMode", "int", FS25_BetterMinimap.sizeMode, true)
+    lC:addConfigValue("settings", "transparant", "bool", FS25_BetterMinimap.transparent, true)
+    lC:addConfigValue("settings", "transMode", "int", FS25_BetterMinimap.transMode, true)
+end

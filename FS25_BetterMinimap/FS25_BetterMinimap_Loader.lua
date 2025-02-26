@@ -8,11 +8,11 @@
 -- #############################################################################
 debug = 2 -- 0=0ff, 1=some, 2=everything, 3=madness
 
-local modDirectory = g_currentModDirectory
+local directory = g_currentModDirectory
 local modName = g_currentModName
 
-source(Utils.getFilename("FS25_BetterMinimap.lua", modDirectory))
-source(Utils.getFilename("ui/FS25_BetterMinimap_UI.lua", modDirectory))
+source(Utils.getFilename("FS25_BetterMinimap.lua", directory))
+source(Utils.getFilename("ui/FS25_BetterMinimap_UI.lua", directory))
 
 -- include our libUtils
 source(Utils.getFilename("libUtils.lua", g_currentModDirectory))
@@ -24,53 +24,69 @@ source(Utils.getFilename("libConfig.lua", g_currentModDirectory))
 lC = libConfig("FS25_BetterMinimap", 1, 0)
 lC:setDebug(0)
 
-local FS25_BetterMinimap
+local BetterMinimap
 
 local function isEnabled()
-    return FS25_BetterMinimap ~= nil
+    return BetterMinimap ~= nil
 end
 
 -- #############################################################################
 
-function FS25_BetterMinimap_load(mission)
+function BM_init()
+  if debug > 1 then print("BM_init()") end
+  
+  -- hook into early load
+  Mission00.load = Utils.prependedFunction(Mission00.load, BM_load)
+  -- hook into late load
+  Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished, BM_loadedMission)
+
+  -- hook into late unload
+  FSBaseMission.delete = Utils.appendedFunction(FSBaseMission.delete, BM_unload)
+
+  -- hook into validateTypes
+  --TypeManager.validateTypes = Utils.prependedFunction(TypeManager.validateTypes, BM_validateTypes)
+end
+
+-- #############################################################################
+
+function BM_load(mission)
     if debug > 1 then
-        print("FS25_BetterMinimap_load()")
+        print("BM_load()")
     end
 
     -- create our BM class
     assert(g_FS25_BetterMinimap == nil)
-    FS25_BetterMinimap = FS25_BetterMinimap:new(mission, modDirectory, modName, g_i18n, g_gui, g_gui.inputManager,
-        g_messageCenter)
-    getfenv(0)["g_FS25_BetterMinimap"] = FS25_BetterMinimap
+    BetterMinimap = FS25_BetterMinimap:new(mission, directory, modName, g_i18n, g_gui, g_gui.inputManager, g_messageCenter)
+    getfenv(0)["g_FS25_BetterMinimap"] = BetterMinimap
 
-    mission.FS25_BetterMinimap = FS25_BetterMinimap
+    mission.BetterMinimap = BetterMinimap
 
-    addModEventListener(FS25_BetterMinimap)
+    addModEventListener(BetterMinimap)
 end
 
 -- #############################################################################
 
-function FS25_BetterMinimap_unload()
+function BM_unload()
     if debug > 1 then
-        print("FS25_BetterMinimap_unload()")
+        print("BM_unload()")
     end
 
     if not isEnabled() then
         return
     end
 
-    removeModEventListener(FS25_BetterMinimap)
+    removeModEventListener(BetterMinimap)
 
-    FS25_BetterMinimap:delete()
-    FS25_BetterMinimap = nil
-    getfenv(0)["g_FS25_BetterMinimap"] = nil
+    BetterMinimap:delete()
+    BetterMinimap = nil
+    getfenv(0)["g_BetterMinimap"] = nil
 end
 
 -- #############################################################################
 
-function FS25_BetterMinimap_loadedMission(mission)
+function BM_loadedMission(mission)
     if debug > 1 then
-        print("FS25_BetterMinimap_load()")
+        print("BM_load()")
     end
 
     if not isEnabled() then
@@ -81,5 +97,20 @@ function FS25_BetterMinimap_loadedMission(mission)
         return
     end
 
-    FS25_BetterMinimap:onMissionLoaded(mission)
+    BetterMinimap:onMissionLoaded(mission)
 end
+
+-- #############################################################################
+--[[
+function BM_validateTypes(types)
+  if debug > 1 then print("BM_validateTypes()") end
+    
+  -- attach only to vehicles
+  if (types.typeName == 'vehicle') then
+    FS25_BetterMinimap.installSpecializations(g_vehicleTypeManager, g_specializationManager, directory, modName)
+  end
+end
+--]]
+-- #############################################################################
+
+BM_init()

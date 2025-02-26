@@ -1,4 +1,5 @@
 cd FS25_BetterMinimap
 powershell -executionpolicy remotesigned -File  ..\zip-betterMinimap.ps1
-pause
+TIMEOUT /T 10
+rem pause
 exit
