@@ -211,7 +211,7 @@ function FS25_BetterMinimap:onUpdate(dt)
         if (g_currentMission.tardisBase.tardisOn ~= nil and self.settings.fullscreen) then
             self:hide()
         else
-            g_currentMission.ingameMap.state = IngameMap.STATE_MINIMAP
+            g_currentMission.hud.ingameMap.state = IngameMap.STATE_MINIMAP
             self:show()
         end
     end
@@ -366,10 +366,10 @@ function FS25_BetterMinimap:onActionCall(actionName, keyStatus, arg4, arg5, arg6
             self.settings.mapUpdate = true
         end
     elseif not self.settings.fullscreen and actionName == "FS25_BetterMinimap_ZOOM_IN" then
-        IngameMap:zoom(-self.zoomFactor * dt)
+        ingameMap:zoom(-self.zoomFactor * dt)
         self.visWidth = ingameMap.mapVisWidthMin
     elseif not self.settings.fullscreen and actionName == "FS25_BetterMinimap_ZOOM_OUT" then
-        IngameMap:zoom(self.zoomFactor * dt)
+        ingameMap:zoom(self.zoomFactor * dt)
         self.visWidth = ingameMap.mapVisWidthMin
     end
 end
@@ -388,12 +388,17 @@ function FS25_BetterMinimap:draw()
         local ingameMap = g_currentMission.hud.ingameMap
 
         -- to do
-        IngameMap:zoom(0)
-        IngameMap.iconZoom = ingameMap.maxIconZoom -- ??
+        -- to do ingameMap:zoom(0)
+        -- to do IngameMap.iconZoom = ingameMap.maxIconZoom -- ??
 
-        IngameMap:updatePlayerPosition()
-        IngameMap:setPosition(self.overlayPosX, self.overlayPosY)
-        IngameMap:setSize(self.mapWidth, self.mapHeight)
+        ingameMap:updatePlayerPosition()
+        --to do: remove debug line
+            if debug > 1 then
+                print("-> " .. myName .. ": setPosition (overlayPosX: " .. self.overlayPosX .. ", overlayPosY: " .. self.overlayPosY .. ")" )
+                print("-> " .. myName .. ": setSize (mapwidth: " .. self.mapWidth .. ", mapHeight: " .. self.mapHeight .. ")" )
+            end
+        ingameMap:setPosition(self.overlayPosX, self.overlayPosY)
+        ingameMap:setSize(self.mapWidth, self.mapHeight)
 
         if (self.settings.fullscreen) then
             ingameMap.mapVisWidthMin = 1
@@ -404,7 +409,7 @@ function FS25_BetterMinimap:draw()
         ingameMap.centerXPos = ingameMap.normalizedPlayerPosX
         ingameMap.centerZPos = ingameMap.normalizedPlayerPosZ
 
-        local leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached = IngameMap:drawMap(
+        local leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached = ingameMap:drawMap(
             self.alpha)
         local foliageOverlay = g_inGameMenu.foliageStateOverlay
 
@@ -415,16 +420,16 @@ function FS25_BetterMinimap:draw()
 
         self:renderMapMode()
 
-        IngameMap:renderHotspots(leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, false,
+        ingameMap:renderHotspots(leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, false,
             self.settings.fullscreen)
         -- ingameMap:renderPlayerArrows(false, leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, true)
-        IngameMap:drawPlayerArrows(false, leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached,
+        ingameMap:drawPlayerArrows(false, leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached,
             true)
-        IngameMap:renderHotspots(leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, true,
+        ingameMap:renderHotspots(leftBorderReached, rightBorderReached, topBorderReached, bottomBorderReached, true,
             self.settings.fullscreen)
         -- ingameMap:renderPlayersCoordinates()
-        IngameMap:drawPlayersCoordinates()
-        IngameMap:drawLatencyToServer()
+        ingameMap:drawPlayersCoordinates()
+        ingameMap:drawLatencyToServer()
         -- ingameMap:drawInputBinding()
     end
 end
@@ -442,7 +447,7 @@ end
 function FS25_BetterMinimap:deactivate()
     -- local ingameMap = g_currentMission.ingameMap
     local ingameMap = g_currentMission.hud.ingameMap
-    IngameMap:resetSettings()
+    ingameMap:resetSettings()
 end
 
 -- #############################################################################
@@ -450,7 +455,7 @@ end
 function FS25_BetterMinimap:show()
     self.visible = true
     -- g_currentMission.ingameMap:setVisible(false)
-    IngameMap:setIsVisible(false)
+    g_currentMission.hud.ingameMap:setVisible(false)
     self:activate()
 end
 
@@ -460,16 +465,48 @@ function FS25_BetterMinimap:hide()
     self.visible = false
     self:deactivate()
     -- g_currentMission.ingameMap:setVisible(true)
-    IngameMap:setIsVisible(true)
+    g_currentMission.hud.ingameMap:setVisible(true)
 end
 
 -- #############################################################################
+
+function FS25_BetterMinimap:frequencytime(frequency)
+    self.visible = false
+    self:deactivate()
+    -- g_currentMission.ingameMap:setVisible(true)
+    g_currentMission.hud.ingameMap:setVisible(true)
+end
+
+-- #############################################################################
+
+function printTable(tbl, indent)
+    indent = indent or ""  -- Default to an empty string if no indent is provided
+
+    for k, v in pairs(tbl) do
+        if type(v) == "table" then
+            -- If the value is a table, print the key and recurse into the table
+            print(indent .. k .. " = {")
+            printTable(v, indent .. "  ")  -- Increase indent for nested table
+            print(indent .. "}")
+        else
+            -- If the value is not a table, just print the key-value pair
+            print(indent .. k .. " = " .. tostring(v))
+        end
+    end
+end
+
+-- #############################################################################
+
 function FS25_BetterMinimap:renderMapMode()
     setTextAlignment(RenderText.ALIGN_LEFT)
     setTextBold(false)
     setTextColor(1, 1, 1, 1)
     -- time to refresh
     if (self.settings.state ~= 0) then
+        local frequencytime = self.const.frequency[self.frequency]
+        -- to do: remove debugline
+        if debug > 1 then print("-> " .. myName .. ": renderMapMode: " .. frequencytime ) end
+
         renderText(self.overlayPosX + 0.003, self.overlayPosY + 0.007, 0.013,
             "[" .. math.ceil((self.const.frequency[self.frequency]) - (self.timer / 1000)) .. "]")
     end
