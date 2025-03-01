@@ -1,93 +1,26 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
-    <GuiElement type="bitmap" profile="backgroundImageIngame"/>
-    <GuiElement type="bitmap" profile="uiElementBg">
-        <GuiElement type="bitmap" profile="uiElementMainBg">
-            <GuiElement type="bitmap" profile="uiElementBaseHeader">
-                <GuiElement type="text" profile="headerText" text="$l10n_gui_BM_TITLE"/>
-            </GuiElement>
-            <GuiElement type="boxLayout" profile="settingsBox" position="20px 576px">
+<?xml version="1.0" encoding="utf-8"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate" name="FS25BetterMinimapUI" version="1.0">
+    <Bitmap profile="fs25_fullScreenBackground" id="background"/>
 
-                <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onToggleVisible"
-                            toolTip="$l10n_gui_BM_TOGGLE_VISIBLE_TOOLTIP" onFocus="onFocusElement" onLeave="onLeaveElement"
-                            focusChangeTop="8" focusChangeBottom="2" focusId="1">
-                    <GuiElement type="button" profile="multiTextOptionLeft"/>
-                    <GuiElement type="button" profile="multiTextOptionRight"/>
-                    <GuiElement type="text" profile="multiTextOptionText"/>
-                    <GuiElement type="text" profile="multiTextOptionTitle" text="$l10n_gui_BM_TOGGLE_VISIBLE"/>
-                    <GuiElement type="bitmap" profile="multiTextOptionBg"/>
-                </GuiElement>
+    <GuiElement profile="fs25_menuContainer">
+        <Overlay name="background" image="dataS/menu/bg_menu.dds" position="0 0" size="1 1" />
+        
+        <Text text="FS25 Better Minimap Settings" position="0.5 0.9" align="center" size="0.04" />
+        
+        <!-- Mod Icon in the top-right corner -->
+        <Overlay name="modIcon" image="FS25_BetterMinimap_icon.dds" position="0.9 0.9" size="0.08" align="right" />
 
-                <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onToggleHelp"
-                            toolTip="$l10n_gui_BM_TOGGLE_HELP_TOOLTIP" onFocus="onFocusElement" onLeave="onLeaveElement"
-                            focusChangeTop="1" focusChangeBottom="3" focusId="2">
-                    <GuiElement type="button" profile="multiTextOptionLeft"/>
-                    <GuiElement type="button" profile="multiTextOptionRight"/>
-                    <GuiElement type="text" profile="multiTextOptionText"/>
-                    <GuiElement type="text" profile="multiTextOptionTitle" text="$l10n_gui_BM_TOGGLE_HELP"/>
-                    <GuiElement type="bitmap" profile="multiTextOptionBg"/>
-                </GuiElement>
-
-                <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onCreate="onChangeFrequency"
-                            toolTip="$l10n_gui_BM_REFRESHFREQ_TOOLTIP" onFocus="onFocusElement" onLeave="onLeaveElement"
-                            focusChangeTop="2" focusChangeBottom="4" focusId="3">
-                    <GuiElement type="button" profile="multiTextOptionLeft"/>
-                    <GuiElement type="button" profile="multiTextOptionRight"/>
-                    <GuiElement type="text" profile="multiTextOptionText"/>
-                    <GuiElement type="text" profile="multiTextOptionTitle" text="$l10n_gui_BM_REFRESHFREQ"/>
-                    <GuiElement type="bitmap" profile="multiTextOptionBg"/>
-                </GuiElement>
-
-                <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onCreate="onChangeSizemode"
-                            toolTip="$l10n_gui_BM_SIZEMODE_TOOLTIP" onFocus="onFocusElement" onLeave="onLeaveElement"
-                            focusChangeTop="3" focusChangeBottom="5" focusId="4">
-                    <GuiElement type="button" profile="multiTextOptionLeft"/>
-                    <GuiElement type="button" profile="multiTextOptionRight"/>
-                    <GuiElement type="text" profile="multiTextOptionText"/>
-                    <GuiElement type="text" profile="multiTextOptionTitle" text="$l10n_gui_BM_SIZEMODE"/>
-                    <GuiElement type="bitmap" profile="multiTextOptionBg"/>
-                </GuiElement>
-
-                <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onToggleTransparent"
-                            toolTip="$l10n_gui_BM_TRANSPARENT_TOOLTIP" onFocus="onFocusElement" onLeave="onLeaveElement"
-                            focusChangeTop="4" focusChangeBottom="6" focusId="5">
-                    <GuiElement type="button" profile="multiTextOptionLeft"/>
-                    <GuiElement type="button" profile="multiTextOptionRight"/>
-                    <GuiElement type="text" profile="multiTextOptionText"/>
-                    <GuiElement type="text" profile="multiTextOptionTitle" text="$l10n_gui_BM_TRANSPARENT"/>
-                    <GuiElement type="bitmap" profile="multiTextOptionBg"/>
-                </GuiElement>
-
-                <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onCreate="onChangeTransMode"
-                            toolTip="$l10n_gui_BM_TRANSMODE_TOOLTIP" onFocus="onFocusElement" onLeave="onLeaveElement"
-                            focusChangeTop="5" focusChangeBottom="7" focusId="6">
-                    <GuiElement type="button" profile="multiTextOptionLeft"/>
-                    <GuiElement type="button" profile="multiTextOptionRight"/>
-                    <GuiElement type="text" profile="multiTextOptionText"/>
-                    <GuiElement type="text" profile="multiTextOptionTitle" text="$l10n_gui_BM_TRANSMODE"/>
-                    <GuiElement type="bitmap" profile="multiTextOptionBg"/>
-                </GuiElement>
-
-            </GuiElement>
-            <GuiElement type="bitmap" profile="ingameMenuHelpRowBg" id="ingameMenuHelpBox" visible="false"
-                        position="0px 40px">
-                <GuiElement type="bitmap" profile="ingameMenuHelpRowIcon"/>
-                <GuiElement type="text" profile="ingameMenuHelpRowText" id="ingameMenuHelpBoxText" text=""/>
-            </GuiElement>
-            <GuiElement type="flowLayout" profile="buttonBox" id="buttonsPC">
-                <GuiElement type="button" id="backButton" profile="buttonBack" size="500px 40px"
-                            text="$l10n_button_back" onClick="onClickBack" focusId="8" focusChangeTop="7"
-                            focusChangeBottom="1" focusChangeRight="2"/>
-                <GuiElement type="button" profile="buttonOK" size="500px 40px" text="$l10n_button_ok"
-                            onClick="onClickOk" focusId="7" focusChangeTop="6" focusChangeBottom="8"
-                            focusChangeLeft="1"/>
-            </GuiElement>
-            <GuiElement type="flowLayout" profile="buttonBoxConsole" id="buttonsConsole">
-                <GuiElement type="button" profile="buttonCircle" size="500px 40px" text="$l10n_button_back"
-                            id="backButtonConsole"/>
-                <GuiElement type="button" profile="buttonRectangle" size="500px 40px" text="$l10n_button_ok"
-                            id="yesButtonConsole"/>
-            </GuiElement>
-        </GuiElement>
+        <Bitmap profile="fs25_multiTextOptionContainer">
+            <MultiTextOption profile="fs25_settingsMultiTextOption" onClick="onClickMultiOption" id="refreshRateList" texts="15s|30s|45s|60s">
+                <Text profile="fs25_multiTextOptionTooltip" name="ignore" text="Refresh Rate"/>
+            </MultiTextOption>
+            <Text profile="fs25_settingsMultiTextOptionTitle" text="Refresh Rate"/>
+        </Bitmap>
+        
+        <Button text="Save" position="0.5 0.3" align="center" size="0.04"
+                action="onSaveSettings" />
+        
+        <Button text="Close" position="0.5 0.1" align="center" size="0.04"
+                action="onClose" />
     </GuiElement>
 </GUI>

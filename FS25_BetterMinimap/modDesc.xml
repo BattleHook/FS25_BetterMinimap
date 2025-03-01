@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="94">
-    <version>0.9.0.26</version>
-    <author>original  FS17:jDanek; FS25: SupremeClicker</author>
+    <version>0.9.1.8</version>
+    <author>original  FS17:jDanek; FS25:SupremeClicker</author>
     <title>
         <en>Better Minimap (MOD is still being developed)</en>
         <de>Bessere Minimap (Mod wird noch entwickelt)</de>
@@ -17,10 +17,6 @@ Function:
 - Color status indication
 - The active mode is listed under the minimap
 - Automatic re-reading of states after 60s with deduction
-- Change the size of the minimap (normal / wide / larger)
-- Remembers the selected size during play
-- Switching transparency
-- Zoom in and out of the minimap
 
 Changelog:
 
@@ -32,10 +28,6 @@ Eigenschaften:
 - Farbstatusanzeige
 - Der aktive Modus ist unter der Minikarte aufgeführt
 - Automatisches erneutes Lesen von Zuständen nach 60s mit Abzug
-- Ändere die Größe der Minikarte (normal / weit / größer)
-- Erinnert sich an die gewählte Größe während der Wiedergabe
-- Transparenz wechseln
-- Vergrößern und verkleinern der Minikarte
 
 Änderungsliste:
 
@@ -48,10 +40,6 @@ Caractéristiques:
 - Indication d'état de la couleur
 - Le mode actif est répertorié sous la minicarte
 - Relecture automatique des états après 60s avec déduction
-- Changer la taille de la minicarte (normale / large / plus grande)
-- Se souvient de la taille sélectionnée pendant la lecture
-- Transparence de commutation
-- Zoom avant et arrière sur la minicarte
 
 Changelog:
 
@@ -64,10 +52,6 @@ Funkce:
 - Barevná indikace stavu polí
 - Aktivní režim je vypsán pod minimapou
 - Automatické znovunačtení stavů po 60s s odpočtem
-- Změna velikost minimapy (normální / široký / větší)
-- Pamatuje si zvolenou velikost během hry
-- Přepínání průhlednosti
-- Přiblížení a oddálení minimapy
 
 Změny:
 
@@ -80,10 +64,6 @@ Funkcje:
 - Wskaźnik statusu koloru
 - Aktywny tryb jest wyświetlany pod minimapą
 - Automatyczne odświeżanie stanów po 60s (licznik)
-- Zmiana rozmiaru minimapy (normalna/szeroka/duża)
-- Zapamiętuje wybrany rozmiar podczas gry
-- Zmiana przezroczystości
-- Przybliżanie i oddalanie minimapy
 
 Dziennik zmian:
 
@@ -95,22 +75,17 @@ Dziennik zmian:
     <l10n filenamePrefix="translations/translation" />
     <actions>
         <action name="FS25_BetterMinimap_SHOW_CONFIG_GUI" />
-        <action name="FS25_BetterMinimap_TOGGLE_HELP" />
         <action name="FS25_BetterMinimap_RELOAD" />
         <action name="FS25_BetterMinimap_PREV" />
         <action name="FS25_BetterMinimap_NEXT" />
-        <action name="FS25_BetterMinimap_ZOOM_IN" />
-        <action name="FS25_BetterMinimap_ZOOM_OUT" />
     </actions>
     <inputBinding>
+        <!-- TODO:
         <actionBinding action="FS25_BetterMinimap_SHOW_CONFIG_GUI">
             <binding device="KB_MOUSE_DEFAULT"
-                     input="KEY_lalt KEY_9" />
+                     input="KEY_ralt KEY_m" />
         </actionBinding>
-        <actionBinding action="FS25_BetterMinimap_TOGGLE_HELP">
-            <binding device="KB_MOUSE_DEFAULT"
-                     input="KEY_lshift KEY_9" />
-        </actionBinding>
+        -->
         <actionBinding action="FS25_BetterMinimap_RELOAD">
             <binding device="KB_MOUSE_DEFAULT"
                      input="KEY_backslash" />
@@ -123,16 +98,15 @@ Dziennik zmian:
             <binding device="KB_MOUSE_DEFAULT"
                      input="KEY_rightbracket" />
         </actionBinding>
-        <actionBinding action="FS25_BetterMinimap_ZOOM_IN">
-            <binding device="KB_MOUSE_DEFAULT"
-                     input="KEY_lalt KEY_KP_plus" />
-        </actionBinding>
-        <actionBinding action="FS25_BetterMinimap_ZOOM_OUT">
-            <binding device="KB_MOUSE_DEFAULT"
-                     input="KEY_lalt KEY_KP_minus" />
-        </actionBinding>
     </inputBinding>
+    <!-- TODO:
+    <gui>
+        <filename>ui/FS25_BetterMinimap_UI.xml</filename>
+    </gui>
+    -->
     <extraSourceFiles>
-        <sourceFile filename="FS25_BetterMinimap_Loader.lua" />
+        <sourceFile filename="lib/LogHelper.lua" />
+        <sourceFile filename="lib/ModHelper.lua" />
+        <sourceFile filename="FS25_BetterMinimap.lua" />
     </extraSourceFiles>
 </modDesc>

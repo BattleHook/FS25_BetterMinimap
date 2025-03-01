@@ -11,24 +11,14 @@ debug = 2 -- 0=0ff, 1=some, 2=everything, 3=madness
 local directory = g_currentModDirectory
 local modName = g_currentModName
 
-source(Utils.getFilename("FS25_BetterMinimap.lua", directory))
-source(Utils.getFilename("ui/FS25_BetterMinimap_UI.lua", directory))
+source(Utils.getFilename("scripts/ModLib/ModHelper.lua", directory))
+source(Utils.getFilename("scripts/ModLib/DebugHelper.lua", directory))
+source(Utils.getFilename("scripts/ModLib/DevHelper.lua", directory))
+source(Utils.getFilename("scripts/ModLib/DialogHelper.lua", directory))
+source(Utils.getFilename("scripts/ModLib/LogHelper.lua", directory))
+--source(Utils.getFilename("scripts/FS25_BetterMinimap.lua", directory))
+--source(Utils.getFilename("ui/FS25_BetterMinimap_UI.lua", directory))
 
--- include our libUtils
-source(Utils.getFilename("libUtils.lua", g_currentModDirectory))
-lU = libUtils()
-lU:setDebug(0)
-
--- include our new libConfig XML management
-source(Utils.getFilename("libConfig.lua", g_currentModDirectory))
-lC = libConfig("FS25_BetterMinimap", 1, 0)
-lC:setDebug(0)
-
-local BetterMinimap
-
-local function isEnabled()
-    return BetterMinimap ~= nil
-end
 
 -- #############################################################################
 
