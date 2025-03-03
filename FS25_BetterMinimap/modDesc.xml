@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="94">
-    <version>0.9.1.8</version>
-    <author>original  FS17:jDanek; FS25:SupremeClicker</author>
+    <version>0.9.1.32</version>
+    <author>FS25:SupremeClicker (original FS17:jDanek);</author>
     <title>
-        <en>Better Minimap (MOD is still being developed)</en>
-        <de>Bessere Minimap (Mod wird noch entwickelt)</de>
-        <fr>Meilleure Minicarte (Le mod est toujours en cours de développement)</fr>
-        <cz>Lepší Minimapa (Mod se stále vyvíjí)</cz>
-        <pl>Ulepszona minimap (MOD jest nadal rozwijany)</pl>
+        <en>Better Minimap</en>
+        <de>Bessere Minimap</de>
+        <fr>Meilleure Minicarte</fr>
+        <cz>Lepší Minimapa</cz>
+        <pl>Ulepszona minimap</pl>
     </title>
     <description>
         <en><![CDATA[
+        (MOD is still being developed)
 A better minimap that replaces the original minimap in the game. Adds the ability to switch imaging modes (plants, plant growth and soil) directly in minimap. These states are automatically restored after 60 seconds by changing the mode or resizing the minimap.
 
 Function:
@@ -22,6 +23,7 @@ Changelog:
 
 ]]></en>
         <de><![CDATA[
+        (Mod wird noch entwickelt)
 Eine bessere Minikarte, die die ursprüngliche Minikarte im Spiel ersetzt. Fügt die Fähigkeit hinzu, Bildgebungsmodi (Pflanzen, Pflanzenwachstum und Boden) direkt in Minikarte zu wechseln. Diese Status werden automatisch nach 60 Sekunden wiederhergestellt, indem Sie den Modus ändern oder die Größe der Minikarte ändern.
 
 Eigenschaften:
@@ -34,6 +36,7 @@ Eigenschaften:
 
 ]]></de>
         <fr><![CDATA[
+        (Le mod est toujours en cours de développement)
 Une meilleure minicarte qui remplace la minicarte originale dans le jeu. Ajoute la possibilité de changer de mode d'imagerie (plantes, croissance des plantes et sol) directement en minicarte. Ces états sont automatiquement restaurés après 60 secondes en changeant le mode ou en redimensionnant la minicarte.
 
 Caractéristiques:
@@ -46,6 +49,7 @@ Changelog:
 
 ]]></fr>
         <cz><![CDATA[
+        (Mod se stále vyvíjí)
 Lepší minimapa, který nahrazuje původní minimapu ve hře. Přidá možnost přepínat zobrazovací režimy (rostliny, růst rostlin a půda) přímo v minimapě. Tyto stavy se automaticky obnoví po 60 sekundách, změnou režimu nebo změnou velikosti minimapu.
 
 Funkce:
@@ -58,6 +62,7 @@ Změny:
 
 ]]></cz>
         <pl><![CDATA[
+        (MOD jest nadal rozwijany)
 Ulepszona minimapa, która zastępuje oryginalną w grze minimapę. Dodaje możliwość przełączania trybów wyświetlania (rodzaje roślin, wzrost roślin i zagęszczenie gleby) bezpośrednio na minimapie. Stany te są automatycznie odświeżanie po 60 sekundach od zmiany trybu lub rozmiaru minimapy.
 
 Funkcje:
@@ -88,15 +93,15 @@ Dziennik zmian:
         -->
         <actionBinding action="FS25_BetterMinimap_RELOAD">
             <binding device="KB_MOUSE_DEFAULT"
-                     input="KEY_backslash" />
+                     input="KEY_rshift KEY_m" />
         </actionBinding>
         <actionBinding action="FS25_BetterMinimap_PREV">
             <binding device="KB_MOUSE_DEFAULT"
-                     input="KEY_leftbracket" />
+                     input="KEY_rshift KEY_comma" />
         </actionBinding>
         <actionBinding action="FS25_BetterMinimap_NEXT">
             <binding device="KB_MOUSE_DEFAULT"
-                     input="KEY_rightbracket" />
+                     input="KEY_rshift KEY_period" />
         </actionBinding>
     </inputBinding>
     <!-- TODO:
@@ -105,8 +110,11 @@ Dziennik zmian:
     </gui>
     -->
     <extraSourceFiles>
-        <sourceFile filename="lib/LogHelper.lua" />
         <sourceFile filename="lib/ModHelper.lua" />
+        <sourceFile filename="lib/DebugHelper.lua" />
+        <sourceFile filename="lib/DialogHelper.lua" />
+        <sourceFile filename="lib/LogHelper.lua" />
+        <sourceFile filename="FS25_BetterMinimap_Debug.lua" />
         <sourceFile filename="FS25_BetterMinimap.lua" />
     </extraSourceFiles>
 </modDesc>
