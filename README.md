@@ -2,11 +2,14 @@ Based on **FS17 Better Minimap by jDanek**
 
 **WARNING: This mod is still under development and is not functional yet**
 
-following functionality is the goal:
+# About
+Support BattleHook on Ko-fi: https://ko-fi.com/battlehook
 
-*A better minimap that replaces the original minimap in the game. Adds the ability to switch imaging modes (plants, plant growth and soil) directly in minimap. These states are automatically restored after 60 seconds by changing the mode or resizing the minimap.*
+## Following functionality is the goal:
 
-*Function:*
+# *A better minimap that replaces the original minimap in the game. Adds the ability to switch imaging modes (plants, plant growth and soil) directly in minimap. These states are automatically restored after 60 seconds by changing the mode or resizing the minimap.*
+
+## *Function:*
 - *Color status indication*
 - *The active mode is listed under the minimap*
 - *Automatic re-reading of states after 60s with deduction*
